@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "518313850834",
+    "project_id": "student-bus-pass-ajce",
+    "storage_bucket": "student-bus-pass-ajce.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518313850834:android:49c1f5d2e2acbe042bba0b",
+        "android_client_info": {
+          "package_name": "com.example.student_bus_pass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR2fNCTJl_CWMQQiAoEgWCO053rqR2-WI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
