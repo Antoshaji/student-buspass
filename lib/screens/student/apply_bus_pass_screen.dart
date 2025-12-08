@@ -105,7 +105,7 @@ class _ApplyBusPassScreenState extends State<ApplyBusPassScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'Your single trip cost is ₹${_selectedStop!.cost}',
+                            'Your single trip cost: ₹${_selectedStop!.cost}',
                           ),
                           const SizedBox(height: 5),
                           Text(
