@@ -109,7 +109,7 @@ class _ApplyBusPassScreenState extends State<ApplyBusPassScreen> {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            'Total Fee to be paid: ₹${_selectedStop!.cost * 40}',
+                            'Total Fee to be paid is ₹${_selectedStop!.cost * 40}',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
