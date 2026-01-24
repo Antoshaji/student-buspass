@@ -8,6 +8,7 @@ import 'screens/admin/add_route_screen.dart';
 import 'screens/student/student_home_screen.dart';
 import 'screens/admin/pass_approval_screen.dart';
 import 'screens/admin/automated_bus_pass_screen.dart';
+import 'screens/admin/view_routes_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,7 +29,42 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Student Bus Pass',
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xFFF8F9FD),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF64748B),
+          primary: const Color(0xFF64748B),
+          surface: Colors.white,
+          onSurface: const Color(0xFF334155),
+        ),
+        useMaterial3: true,
+        fontFamily: 'Roboto', // Or system default, keeping it clean
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: const Color(0xFFF1F5F9),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF64748B),
+            foregroundColor: Colors.white,
+            elevation: 0,
+            shape: const StadiumBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ),
       home: const AuthWrapper(),
     );
   }
@@ -129,6 +165,18 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                     child: const Text('Automated Bus Pass'),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ViewRoutesScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text('View Active Routes'),
                   ),
                 ],
               ),
