@@ -1,17 +1,19 @@
 class BusPassRequestModel {
   final String id;
+  final String uid; // Added UID to target exact user
   final String studentId;
   final String studentName;
-  final String studentEmail; // Added email
+  final String studentEmail;
   final String routeId;
   final String routeName;
   final String stopName;
   final double cost;
-  final String status; // 'pending', 'approved', 'rejected'
+  final String status;
   final DateTime requestDate;
 
   BusPassRequestModel({
     required this.id,
+    required this.uid,
     required this.studentId,
     required this.studentName,
     required this.studentEmail,
@@ -26,6 +28,7 @@ class BusPassRequestModel {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
+      'uid': uid,
       'studentId': studentId,
       'studentName': studentName,
       'studentEmail': studentEmail,
@@ -41,6 +44,7 @@ class BusPassRequestModel {
   factory BusPassRequestModel.fromMap(Map<String, dynamic> map) {
     return BusPassRequestModel(
       id: map['id'] ?? '',
+      uid: map['uid'] ?? '',
       studentId: map['studentId'] ?? '',
       studentName: map['studentName'] ?? '',
       studentEmail: map['studentEmail'] ?? '',

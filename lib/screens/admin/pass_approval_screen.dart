@@ -17,20 +17,46 @@ class PassApprovalScreen extends StatelessWidget {
           .doc(request.id)
           .update({'status': newStatus});
 
-      // 2. Find User by Student ID and Update their status
-      // Note: Ideally we should store uid in request to make this easier/safer
-      // But based on current model, we query by studentId
-      final userQuery = await FirebaseFirestore.instance
-          .collection('users')
-          .where('studentId', isEqualTo: request.studentId)
-          .limit(1)
-          .get();
-
-      if (userQuery.docs.isNotEmpty) {
-        await userQuery.docs.first.reference.update({
-          'bus_pass_status': newStatus,
-        });
+      // 2. Find User and Update status
+      DocumentReference userDoc;
+      if (request.uid.isNotEmpty) {
+        userDoc = FirebaseFirestore.instance
+            .collection('users')
+            .doc(request.uid);
+        print('DEBUG: Using direct UID: ${request.uid}');
+      } else {
+        // Fallback for legacy requests without UID
+        final userQuery = await FirebaseFirestore.instance
+            .collection('users')
+            .where('studentId', isEqualTo: request.studentId)
+            .limit(1)
+            .get();
+        if (userQuery.docs.isEmpty) {
+          print('DEBUG: User not found for studentId ${request.studentId}');
+          return;
+        }
+        userDoc = userQuery.docs.first.reference;
+        print('DEBUG: Found user by studentId: ${userDoc.id}');
       }
+
+      final updates = <String, dynamic>{'bus_pass_status': newStatus};
+      print('DEBUG: New status is $newStatus');
+
+      if (newStatus == 'approved') {
+        // Calculate fee (Assuming 40 trips * cost per trip)
+        final double totalFee = request.cost * 40;
+        updates['balance'] = totalFee;
+        print('DEBUG: Approved! Setting balance to $totalFee');
+      } else if (newStatus == 'rejected') {
+        // Force reset to 0 in case it was set previously
+        updates['balance'] = 0.0;
+        print('DEBUG: Rejected! Forcing balance to 0.0');
+      } else {
+        print('DEBUG: Not approved. Balance update skipped.');
+      }
+
+      print('DEBUG: Applying updates: $updates');
+      await userDoc.update(updates);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

@@ -133,19 +133,17 @@ class _ApplyBusPassScreenState extends State<ApplyBusPassScreen> {
 
                               final request = BusPassRequestModel(
                                 id: const Uuid().v4(),
+                                uid: widget.user.uid, // Store UID
                                 studentId: widget.user.studentId ?? '',
                                 studentName: widget.user.name,
-                                studentEmail: widget.user.email, // Pass email
+                                studentEmail: widget.user.email,
                                 routeId: _selectedRoute!.id,
                                 routeName: _selectedRoute!.name,
                                 stopName: _selectedStop!.name,
-                                cost: _selectedStop!
-                                    .cost, // Storing single trip cost as personal fare
+                                cost: _selectedStop!.cost,
                                 requestDate: DateTime.now(),
                                 status: 'pending',
                               );
-
-                              final double totalFee = _selectedStop!.cost * 40;
 
                               try {
                                 // Save request
@@ -160,7 +158,7 @@ class _ApplyBusPassScreenState extends State<ApplyBusPassScreen> {
                                     .doc(widget.user.uid)
                                     .update({
                                       'bus_pass_status': 'pending',
-                                      'balance': totalFee,
+                                      // 'balance': totalFee,  <-- REMOVED: Balance should only update on approval
                                     });
 
                                 if (context.mounted) {

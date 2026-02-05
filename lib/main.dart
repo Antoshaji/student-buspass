@@ -4,11 +4,8 @@ import 'package:provider/provider.dart';
 import 'services/auth_service.dart';
 import 'screens/auth/login_screen.dart';
 import 'models/user_model.dart';
-import 'screens/admin/add_route_screen.dart';
 import 'screens/student/student_home_screen.dart';
-import 'screens/admin/pass_approval_screen.dart';
-import 'screens/admin/automated_bus_pass_screen.dart';
-import 'screens/admin/view_routes_screen.dart';
+import 'screens/admin/admin_home_screen.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Student Bus Pass',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFF8F9FD),
@@ -112,76 +110,8 @@ class HomeScreen extends StatelessWidget {
             return StudentHomeScreen(user: userModel!);
           }
 
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Admin Dashboard'),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.logout),
-                  onPressed: () => authService.signOut(),
-                ),
-              ],
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Hello Admin ${userModel?.name ?? ""}',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AddRouteScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text('Add New Route'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const PassApprovalScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text('Pass Approvals'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AutomatedBusPassScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text('Automated Bus Pass'),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ViewRoutesScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text('View Active Routes'),
-                  ),
-                ],
-              ),
-            ),
-          );
+          // Admin Home Screen
+          return AdminHomeScreen(user: userModel!);
         },
       ),
     );
