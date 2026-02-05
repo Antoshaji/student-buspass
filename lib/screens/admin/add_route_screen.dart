@@ -55,7 +55,7 @@ class _AddRouteScreenState extends State<AddRouteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add New Route')),
+      appBar: AppBar(title: const Text('Add New Routes')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
