@@ -6,6 +6,7 @@ class UserModel {
   final String? studentId; // Only for students
   final double balance; // Only for students
   final String busPassStatus; // 'none', 'pending', 'approved', 'rejected'
+  final String? nfcUid; // HEX User ID from NFC Card
 
   UserModel({
     required this.uid,
@@ -15,6 +16,7 @@ class UserModel {
     this.studentId,
     this.balance = 0.0,
     this.busPassStatus = 'none',
+    this.nfcUid,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +28,7 @@ class UserModel {
       'studentId': studentId,
       'balance': balance,
       'bus_pass_status': busPassStatus,
+      'nfcUid': nfcUid,
     };
   }
 
@@ -38,6 +41,7 @@ class UserModel {
       studentId: map['studentId'],
       balance: (map['balance'] ?? 0.0).toDouble(),
       busPassStatus: map['bus_pass_status'] ?? 'none',
+      nfcUid: map['nfcUid'],
     );
   }
 }

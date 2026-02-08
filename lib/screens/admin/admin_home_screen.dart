@@ -6,6 +6,7 @@ import 'add_route_screen.dart';
 import 'pass_approval_screen.dart';
 import 'automated_bus_pass_screen.dart';
 import 'view_routes_screen.dart';
+import 'map_nfc_screen.dart';
 
 class AdminHomeScreen extends StatelessWidget {
   final UserModel user;
@@ -121,6 +122,17 @@ class AdminHomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => const ViewRoutesScreen(),
+                            ),
+                          ),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          title: 'Map NFC Card',
+                          icon: Icons.nfc_outlined,
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MapNfcScreen(),
                             ),
                           ),
                         ),
