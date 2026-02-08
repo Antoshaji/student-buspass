@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Added for sign out
 import 'services/auth_service.dart';
 import 'screens/auth/login_screen.dart';
 import 'models/user_model.dart';
@@ -11,6 +12,9 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseAuth.instance.signOut();
+  print("DEBUG: Force signed out in main.dart");
+
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => AuthService())],
@@ -79,6 +83,7 @@ class AuthWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           final UserModel? user = snapshot.data;
+          print("DEBUG: AuthWrapper received user: ${user?.email}");
           return user == null ? const LoginScreen() : const HomeScreen();
         }
         return const Scaffold(body: Center(child: CircularProgressIndicator()));

@@ -104,6 +104,19 @@ class _AddRouteScreenState extends State<AddRouteScreen> {
                     onPressed: _addStop,
                     icon: const Icon(Icons.add),
                     label: const Text('Add Stop'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: const Color(0xFF64748B),
+                      elevation: 0,
+                      side: const BorderSide(color: Color(0xFFCBD5E1)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                    ),
                   ),
                   _isLoading
                       ? const CircularProgressIndicator()
@@ -162,6 +175,18 @@ class _AddRouteScreenState extends State<AddRouteScreen> {
                               }
                             }
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF64748B),
+                            foregroundColor: Colors.white,
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 32,
+                              vertical: 16,
+                            ),
+                          ),
                           child: const Text('Save Route'),
                         ),
                 ],

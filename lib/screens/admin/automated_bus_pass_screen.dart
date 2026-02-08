@@ -449,6 +449,18 @@ class _AutomatedBusPassScreenState extends State<AutomatedBusPassScreen> {
                     });
                   },
                   child: const Text('Done / Next'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF64748B),
+                    foregroundColor: Colors.white,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
+                  ),
                 ),
               ],
             ),
