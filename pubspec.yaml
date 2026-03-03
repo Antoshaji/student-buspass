@@ -41,6 +41,7 @@ dependencies:
   uuid: ^4.5.2
   intl: ^0.20.2
   flutter_libserialport: ^0.5.0
+  fl_chart: ^0.66.2
 
 dev_dependencies:
   flutter_test:

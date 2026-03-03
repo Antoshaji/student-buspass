@@ -12,8 +12,21 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // forceful signout
   await FirebaseAuth.instance.signOut();
-  print("DEBUG: Force signed out in main.dart");
+
+  // Wait a moment to ensure persistence is cleared
+  await Future.delayed(const Duration(milliseconds: 500));
+
+  if (FirebaseAuth.instance.currentUser != null) {
+    print("DEBUG: Retrying sign out...");
+    await FirebaseAuth.instance.signOut();
+  }
+
+  print(
+    "DEBUG: Force signed out. Current User: ${FirebaseAuth.instance.currentUser?.email}",
+  );
 
   runApp(
     MultiProvider(

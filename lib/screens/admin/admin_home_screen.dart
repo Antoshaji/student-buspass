@@ -7,6 +7,7 @@ import 'pass_approval_screen.dart';
 import 'automated_bus_pass_screen.dart';
 import 'view_routes_screen.dart';
 import 'map_nfc_screen.dart';
+import 'view_students_screen.dart';
 
 class AdminHomeScreen extends StatelessWidget {
   final UserModel user;
@@ -133,6 +134,17 @@ class AdminHomeScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => const MapNfcScreen(),
+                            ),
+                          ),
+                        ),
+                        _buildMenuCard(
+                          context,
+                          title: 'View Students',
+                          icon: Icons.people_alt_outlined,
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ViewStudentsScreen(),
                             ),
                           ),
                         ),
